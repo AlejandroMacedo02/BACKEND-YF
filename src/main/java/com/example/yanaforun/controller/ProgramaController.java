@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author crnv_
  */
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("api/programa")
 @Api(value = "Microservicio de programa", description = "Microservicio de programa")
@@ -71,7 +71,7 @@ public class ProgramaController {
         }
         try {
             programa.setProgId(id);
-            programaService.save(programa);
+            programaService.save(programa); 
             result.put("success", true);
             result.put("message", "Se ha actualizado los datos del programa.");
             result.put("data", programa);
@@ -103,7 +103,7 @@ public class ProgramaController {
             return new ResponseEntity<>(new Exception(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         }
-    @ApiOperation(value = "Obtiene Datos del Empleado")
+    @ApiOperation(value = "Obtiene datos del programa")
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, HttpServletRequest request) {
         HashMap<String, Object> result = new HashMap<>();

@@ -23,4 +23,5 @@ public interface PersonaService {
     public void delete(Persona persona);
 
     public void deleteById(Long id);
+    
 }
