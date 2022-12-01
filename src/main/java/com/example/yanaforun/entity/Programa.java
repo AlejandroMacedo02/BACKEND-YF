@@ -24,7 +24,7 @@ public class Programa implements Serializable{
     @Id
     @Column(name = "prog_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long progId;
+    private Long ProgId;
     
     @Column(name = "pro_nombre")
     private String progNombre;

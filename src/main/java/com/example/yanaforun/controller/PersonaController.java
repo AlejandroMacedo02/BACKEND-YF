@@ -45,7 +45,7 @@ public class PersonaController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Crea persona")
+    @ApiOperation(value = "Crear persona")
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Persona persona, HttpServletRequest request) {
         HashMap<String, Object> result = new HashMap<>();

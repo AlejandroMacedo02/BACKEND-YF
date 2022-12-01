@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author crnv_
  */
-
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("api/programa")
@@ -59,28 +58,46 @@ public class ProgramaController {
        
     }
     
-    @ApiOperation(value = "Actualiza un programa")
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Programa programa, HttpServletRequest request) {
+    @ApiOperation(value = "Modifica una programa")
+   @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Programa programa) {
         HashMap<String, Object> result = new HashMap<>();
         Programa data = programaService.findById(id);
         if (data == null) {
             result.put("success", false);
-            result.put("message", "No existe programa con Id: " + id);
+            result.put("message", "No existe programa con id: " + id);
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
-        try {
+        else {
             programa.setProgId(id);
-            programaService.save(programa); 
+            programaService.save(programa);
             result.put("success", true);
-            result.put("message", "Se ha actualizado los datos del programa.");
+            result.put("message", "Datos actualizados correctamente");
             result.put("data", programa);
             return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (Exception ex) {
-            return new ResponseEntity<>(new Exception(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+
         }
+  
+    }
         
+        @ApiOperation(value = "Obtiene datos del programa")
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, HttpServletRequest request) {
+        HashMap<String, Object> result = new HashMap<>();
+        Programa data = programaService.findById(id);
+        if (data == null) {
+            result.put("success", false);
+            result.put("message", "No existe empleado con Id: " + id);
+            return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
+        result.put("success", true);
+        result.put("message", "Se ha encontrado el registro.");
+        result.put("data", data);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    
+    
+    }
+        
     @ApiOperation(value = "Elimina un programa")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, HttpServletRequest request) {
@@ -102,20 +119,9 @@ public class ProgramaController {
         } catch (Exception ex) {
             return new ResponseEntity<>(new Exception(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        }
-    @ApiOperation(value = "Obtiene datos del programa")
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, HttpServletRequest request) {
-        HashMap<String, Object> result = new HashMap<>();
-        Programa data = programaService.findById(id);
-        if (data == null) {
-            result.put("success", false);
-            result.put("message", "No existe empleado con Id: " + id);
-            return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-        }
-        result.put("success", true);
-        result.put("message", "Se ha encontrado el registro.");
-        result.put("data", data);
-        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
+        
+            
+  
+
