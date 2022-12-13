@@ -4,7 +4,6 @@
  */
 package com.example.yanaforun.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,20 +14,22 @@ import lombok.Data;
 
 /**
  *
- * @author crnv_
+ * @author alejandromacedop
  */
 @Entity
 @Data
 @Table(name = "programa")
-public class Programa implements Serializable{
+public class Programa {
+    
     @Id
-    @Column(name = "prog_id")
+    @Column(name = "pro_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ProgId;
+    private Long proId;
     
     @Column(name = "pro_nombre")
-    private String progNombre;
+    private String proNombre;
     
-    @Column (name = "pro_descripcion")
-    private String progDescripcion;
+    @Column (name = "pro_desc")
+    private String proDescripcion;
+    
 }

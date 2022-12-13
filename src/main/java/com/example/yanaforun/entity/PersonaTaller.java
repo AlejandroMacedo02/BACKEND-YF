@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.example.yanaforun.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,26 +13,28 @@ import lombok.Data;
 
 /**
  *
- * @author crnv_
+ * @author kodegod
  */
+
 @Entity
 @Data
-@Table(name = "personaTaller")
-public class PersonaTaller implements Serializable {
-    @Id
-    @Column(name = "pert_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pertId;
+@Table(name = "persona_taller")
+public class PersonaTaller {
     
-    @Column (name = "pert_asistencia")
-    private int pertAsistencia;
+    @Id
+    @Column(name = "peta_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long petaId;
+    
+    @Column (name = "pe_estado_asistencia")
+    private int petaEstadoAsistencia;
     
     @ManyToOne
-    @JoinColumn(name = "pers_id")
+    @JoinColumn(name = "pe_id")
     private Persona persona;
     
     @ManyToOne
-    @JoinColumn(name = "tall_id")
+    @JoinColumn(name = "ta_id")
     private Taller taller;
     
 }

@@ -4,8 +4,7 @@
  */
 package com.example.yanaforun.entity;
 
-import java.io.Serializable;
-import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,41 +14,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  *
- * @author crnv_
+ * @author alejandromacedop
  */
 @Entity
 @Data
 @Table(name = "taller")
-public class Taller implements Serializable {
+public class Taller {
+    
     @Id
-    @Column(name = "tall_id")
+    @Column(name = "ta_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tallId;
+    private Long taId;
     
-    @Column(name = "tall_tema")
-    private String tallTema;
+    @Column(name = "ta_tema")
+    private String taTema;
     
-    @Column(name = "tall_descripcion")
-    private String tallDescripcion;
+    @Column(name = "ta_desc")
+    private String taDesc;
     
-    @Column(name = "tall_fecha")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date tallFecha;
+    @Column(name = "ta_fecha")
+    private String taFecha;
     
-    @Column(name = "tall_hora")
-    private String tallHora;
+    @Column(name = "ta_hora")
+    private String taHora;
     
-    @Column(name = "tall_hora_academicas")
-    private String tallHoraAcademicas;
+    @Column(name = "ta_hora_academicas")
+    private String taHoraAcademicas;
     
-    @Column (name = "tall_lugar")
-    private String tallLugar;
+    @Column (name = "ta_lugar")
+    private String taLugar;
     
     @ManyToOne
-    @JoinColumn(name = "prog_id")
+    @JoinColumn(name = "pro_id")
     private Programa programa;
+    
 }

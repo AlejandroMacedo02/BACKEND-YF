@@ -4,7 +4,6 @@
  */
 package com.example.yanaforun.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,22 +16,28 @@ import lombok.Data;
 
 /**
  *
- * @author crnv_
+ * @author kodegod
  */
+
 @Entity
 @Data
 @Table(name = "materiales")
-public class Materiales implements Serializable {
-    @Id
-    @Column(name = "mate_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mateId;
+public class Materiales {
     
-    @Column(name = "mate_nombre")
-    private String mateNombre;
+    @Id
+    @Column(name = "ma_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long maId;
+    
+    @Column(name = "ma_name")
+    private String maName;
     
     @ManyToOne
-    @JoinColumn(name = "tall_id")
+    @JoinColumn(name = "ta_id")
     private Taller taller;
+    
+    @ManyToOne
+    @JoinColumn(name = "ca_id")
+    private TipoMateriales tipoMateriales;
     
 }

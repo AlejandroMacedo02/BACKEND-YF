@@ -1,43 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.yanaforun.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
 /**
  *
- * @author crnv_
+ * @author kodegod
  */
+
 @Entity
 @Data
 @Table(name = "persona")
-public class Persona implements Serializable {
-     @Id
-    @Column(name = "pers_id")
+public class Persona {
+    
+    @Id
+    @Column(name = "pe_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long persId;
+    private Long peId;
     
-    @Column(name = "pers_nombres")
-    private String persNombres;
+    @Column(name = "pe_dni")
+    private int peDNI;
     
-    @Column(name = "pers_apellido_paterno")
-    private String persAP;
+    @Column(name = "pe_nombres")
+    private String peNombres;
     
-    @Column(name = "pers_apellido_materno")
-    private String persAM;
+    @Column(name = "pe_apellido_p")
+    private String peApellidoP;
     
-    @Column(name = "pers_dni")
-    private int persDni;
+    @Column(name = "pe_apellido_m")
+    private String peApellidoM;
     
-    @Column (name = "pers_telefono")
-    private int persTelefono;   
+    @Column (name = "pe_fono")
+    private int peFono;    
+    
+    @ManyToOne
+    @JoinColumn(name = "tp_id")
+    private TipoPersona tipoPersona;
+    
+    @ManyToOne
+    @JoinColumn(name = "ca_id")
+    private Escuela escuela;
+    
 }

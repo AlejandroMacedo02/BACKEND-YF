@@ -15,20 +15,22 @@ import lombok.Data;
 
 /**
  *
- * @author crnv_
+ * @author alejandromacedop
  */
 @Entity
 @Data
-@Table(name = "tipoPersona")
-public class TipoPersona implements Serializable {
+@Table(name = "tipo_persona")
+public class TipoPersona {
+    
     @Id
-    @Column(name = "tipp_id")
+    @Column(name = "tp_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tippId;
+    private Long tpId;
     
-    @Column(name = "tipp_nombre")
-    private String tippNombre;
+    @Column(name = "tp_nombre")
+    private String tpNombre;
     
-    @Column(name = "tipp_des")
-    private String tippDesc;
+    @Column(name = "tp_des")
+    private String tpDesc;
+    
 }
