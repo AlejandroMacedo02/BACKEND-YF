@@ -27,101 +27,84 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author crnv_
  */
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("api/programa")
-@Api(value = "Microservicio de programa", description = "Microservicio de programa")
+@RequestMapping("/programas")
+@Api(value = "Microservicio de Gestion de los programas", description = "Microservicio de Gestion de los programas")
 public class ProgramaController {
+    
     @Autowired
     ProgramaService programaService;
-    
-    @ApiOperation(value = "Lista de programas"/*,authorizations = { @Authorization(value = "apiKey") }*/)//,  
+
+    @ApiOperation(value = "Lista de programas")
     @GetMapping
-    public ResponseEntity<?> findAll(HttpServletRequest request) {
+    public ResponseEntity<?> findAll() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("success", true);
-        result.put("message", "El programa se ha registrado correctamente.");
+        result.put("message", "Lista de programas");
         result.put("data", programaService.findAll());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Crea programa")
-    @PostMapping
-    public ResponseEntity<?> save(@RequestBody Programa programa, HttpServletRequest request) {
-        HashMap<String, Object> result = new HashMap<>();
-        Programa data = programaService.save(programa);
-
-        result.put("success", true);
-        result.put("message", "El programa se ha registrado correctamente.");
-        result.put("data", data);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-       
+    @ApiOperation(value = "Obtiene datos de un programa")
+    @GetMapping("/{id}")
+    public ResponseEntity<Programa> findById(@PathVariable Long id) {
+        Programa programa = programaService.findById(id);
+        return ResponseEntity.ok(programa);
     }
+
     
-    @ApiOperation(value = "Modifica una programa")
-   @PutMapping("/{id}")
+    @ApiOperation(value = "Crea un programa")
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody Programa programa) {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("success", true);
+        result.put("message", "Programa registrado correctamente");
+        result.put("data", programaService.save(programa));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    //a
+
+    
+    @ApiOperation(value = "Modifica un programa")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody Programa programa) {
         HashMap<String, Object> result = new HashMap<>();
         Programa data = programaService.findById(id);
         if (data == null) {
             result.put("success", false);
-            result.put("message", "No existe programa con id: " + id);
-            return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-        }
-        else {
-            programa.setProId(id);
-            programaService.save(programa);
-            result.put("success", true);
-            result.put("message", "Datos actualizados correctamente");
-            result.put("data", programa);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-
-        }
-  
-    }
-        
-        @ApiOperation(value = "Obtiene datos del programa")
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable(value = "id") Long id, HttpServletRequest request) {
-        HashMap<String, Object> result = new HashMap<>();
-        Programa data = programaService.findById(id);
-        if (data == null) {
-            result.put("success", false);
-            result.put("message", "No existe empleado con Id: " + id);
-            return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
-        }
-        result.put("success", true);
-        result.put("message", "Se ha encontrado el registro.");
-        result.put("data", data);
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    
-    
-    }
-        
-    @ApiOperation(value = "Elimina un programa")
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id, HttpServletRequest request) {
-        HashMap<String, Object> result = new HashMap<>();
-        Programa data = programaService.findById(id);
-        if (data == null) {
-            result.put("success", false);
-            result.put("message", "No existe División con id: " + id);
+            result.put("message", "No existe registro con Id: " + id);
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
         try {
-            // data.setEstado(false);
-            programaService.delete(data);
+            programa.setProId(id);
+            programaService.save(programa);
             result.put("success", true);
-            result.put("message", "Se ha eliminado los datos del registro.");
-            // result.put("data", data);
+            result.put("message", "Datos actualizados correctamente.");
+            result.put("data", programa);
             return new ResponseEntity<>(result, HttpStatus.OK);
-
         } catch (Exception ex) {
             return new ResponseEntity<>(new Exception(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-}
-        
-            
+    
+    @ApiOperation(value = "Elimina un programa")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
+        HashMap<String, Object> result = new HashMap<>();
+    Programa data = programaService.findById(id);
+    if(data == null){
+        result.put("success", false);
+        result.put("message", "No existe programa con id:" + id);
+  return new ResponseEntity <>(result, HttpStatus.NOT_FOUND);
+    } else{
+  programaService.deleteById(id);
+            result.put("success", true);
+            result.put("message", "Registro Eliminado correctamente");
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+    }
+    
+}      
   
 
