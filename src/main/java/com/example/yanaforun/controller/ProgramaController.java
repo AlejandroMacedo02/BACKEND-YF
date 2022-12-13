@@ -69,7 +69,7 @@ public class ProgramaController {
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
         else {
-            programa.setProgId(id);
+            programa.setProId(id);
             programaService.save(programa);
             result.put("success", true);
             result.put("message", "Datos actualizados correctamente");

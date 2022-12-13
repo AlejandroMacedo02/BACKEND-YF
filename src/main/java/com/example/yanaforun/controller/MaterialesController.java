@@ -68,7 +68,7 @@ public class MaterialesController {
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
         try {
-            materiales.setMateId(id);
+            materiales.setMaId(id);
             materialesService.save(materiales);
             result.put("success", true);
             result.put("message", "Se ha actualizado los datos del empleado.");
