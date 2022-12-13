@@ -13,7 +13,7 @@ import lombok.Data;
 
 /**
  *
- * @author kodegod
+ * @author alejandromacedop
  */
 
 @Entity

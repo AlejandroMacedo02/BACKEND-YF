@@ -68,7 +68,7 @@ public class PersonaController {
             return new ResponseEntity<>(result, HttpStatus.NOT_FOUND);
         }
         try {
-            persona.setPersId(id);
+            persona.setPeId(id);
             personaService.save(persona);
             result.put("success", true);
             result.put("message", "Se ha actualizado los datos del empleado.");
